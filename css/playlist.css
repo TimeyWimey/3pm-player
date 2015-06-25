@@ -132,7 +132,7 @@ div.controls div.sort:hover .popup {
     position: relative;
     cursor: pointer;
     padding: 3px;
-    border-radius: 3px;
+    border-radius: 0px;
 }
 .nextList li {
     cursor: default;
@@ -282,7 +282,7 @@ div.controls div.sort:hover .popup {
     background-color: rgba(0, 0, 0, 0.61);
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 3px;
+    border-radius: 0px;
     cursor: pointer;
     opacity: 0.7;
 }
@@ -550,5 +550,8 @@ background-repeat: no-repeat;
     border-radius: 50px;
 }
 li{
-    border-radius: 2px;
+    border-radius: 0px;
+}
+li:active{
+    background: #F9F9F9 !important;
 }

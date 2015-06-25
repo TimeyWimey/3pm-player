@@ -269,7 +269,7 @@ engine.context = function() {
     var showMenu = function() {
        // console.log( $.extend({},context_menu, custom_menu.track));
         if (! $( "#side-menu" ).hasClass( "opened" )) $('#side-menu').addClass('opened'); else $('#side-menu').removeClass('opened');
-       /* engine.wm.createWindow({type: 'menu', config: {
+        /*engine.wm.createWindow({type: 'menu', config: {
             type: "menu",
             list: $.extend({},context_menu, custom_menu.track)
         }});*/

@@ -845,6 +845,81 @@ li{
 }
 
 
+#greeter{
+    
+    position: fixed;
+    z-index: 301;
+    width: 100%;
+    height: 100%;
+    background-color: #58B1FF;
+    transition:.3s;
+ 
+    
+}
+.darker{
+        position: absolute;
+    top: 0;
+    width: 100%;
+    height: 32px;
+    background-color: #4989C1;
+}
+#x-greeter{
+        background: url(../img/x_w.png);
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    position: absolute;
+    top: 6px;
+    opacity: .7;
+    cursor: pointer;
+    transition:.15s;
+        z-index: 5555;
+    
+}
+
+.menu-start {
+    padding: 12px;
+    color: white;
+    border: 1px solid white;
+    width: 115px;
+    text-align: center;
+    cursor: pointer;
+    margin: 15px 0;
+    transition:.2s;
+}
+.menu-start:hover{
+    color: #58B1FF;
+    background-color: white;
+}
+.menu1{
+    margin-top: 150px;    display: inline-block;
+margin-left: calc((100% - 282px)/3);
+
+    vertical-align: top;
+}
+#x-greeter:hover{
+    opacity: 1;
+}
+
+#dragger > div {
+    margin-top: 62px;
+    font-size: 20px;
+}
+
+#dragger{
+       color: white;
+    width: 100%;
+    height: 124px;
+    /* border-radius: 100px; */
+    border-bottom: dashed white 2px;
+    margin: auto;
+    text-align: center;
+    position: absolute;
+}
+li:hover{
+    background-color: #d2d2d2;
+}
+
 @media only screen and (min-width:920px) {
  
     .menu{
@@ -930,3 +1005,4 @@ li{
     }
     /* CSS rules here */
 }
+

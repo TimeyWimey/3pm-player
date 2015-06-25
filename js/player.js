@@ -310,8 +310,48 @@ window.player = function () {
       
 
       });
+        $('#x-greeter').on('click',function(){     window.close();});
+        $('#gdrive').on('click', function () {
+                engine.cloud.gd.getFileList(undefined, function (list) {
+                    engine.wm.createWindow({type: 'filelist', config: {type: "gd", filelist: list, cb: function(collection) {
+                        var collections = [collection];
+                        engine.playlist.emptyPlaylist(function(){
+                            engine.playlist.appendPlaylist(collections, function() {
+                                engine.playlist.selectPlaylist(collections[0].id);
+                            });
+                        });
+                    }}});
+                });
+                 if ( $( "#side-menu" ).hasClass( "opened" ))  $('#side-menu').removeClass('opened');
+            });
+        $('#onedrive').on('click',function (){ engine.cloud.od.getFileList(undefined, function (list) {
+                    engine.wm.createWindow({type: 'filelist', config: {type: "od", filelist: list, cb: function(collection) {
+                        var collections = [collection];
+                        engine.playlist.emptyPlaylist(function(){
+                            engine.playlist.appendPlaylist(collections, function() {
+                                engine.playlist.selectPlaylist(collections[0].id);
+                            });
+                        });
+                    }}});
+                });
+            if ( $( "#side-menu" ).hasClass( "opened" ))  $('#side-menu').removeClass('opened');
+            });
 
+        $('#folder').on('click',function () {
+                chrome.fileSystem.chooseEntry({type: 'openDirectory'}, function (entry) {
+                    engine.files.readAnyFiles([entry], function(collections) {
+                        engine.wm.createWindow({type: 'm3u', config: {type: 'm3u', collectionList: collections, join: 1, cb: function(index) {
+                            engine.playlist.emptyPlaylist(function(){
+                                engine.playlist.appendPlaylist(collections, function() {
+                                    engine.playlist.selectPlaylist(collections[index].id);
+                                });
+                            });
+                        }}});
+                    });
+                });
+            if ( $( "#side-menu" ).hasClass( "opened" ))  $('#side-menu').removeClass('opened');
 
+            });
 
         $('#files').on('click', function(){ engine.context.menu.openFiles.action();});
 $('html').click(function(e) {
@@ -510,14 +550,61 @@ $('html').click(function(e) {
         );
 
 
-  
-
-        dom_cache.body.on('drop', function (e) {
+        g=$("#dragger");
+        var over = false;
+        $('#dragger').on('drop', function (e) {
             /**
              * @namespace e.originalEvent.dataTransfer
              * @namespace e.originalEvent.dataTransfer.files
              */
             e.preventDefault();
+             if (over) {
+      over = false;
+    
+            dom_cache.drop_layer.addClass('dropped');
+            var entryList = e.originalEvent.dataTransfer.items;
+            engine.files.readDropFiles(entryList, function(collections) {
+                if (collections === undefined) {
+                    return;
+                }
+                engine.wm.createWindow({type: 'm3u', config: {type: 'm3u', collectionList: collections, join: 1, cb: function(index) {
+                    engine.playlist.emptyPlaylist(function(){
+                        engine.playlist.appendPlaylist(collections, function() {
+                            engine.playlist.selectPlaylist(collections[index].id);
+                        });
+                    });
+                }}});
+            });  
+    }
+        }).on('dragover', function (e) {
+            e.preventDefault();
+            if (! over) {
+      over = true;   g.css({"display": "block"});
+
+    }
+         
+            clearTimeout(var_cache.drop_timer);
+            var_cache.drop_timer = setTimeout(function () {
+             //   dom_cache.drop_layer.css({"display": "none"});
+             //   dom_cache.drop_layer.removeClass('dropped');
+            }, 300);
+        }).on("dragleave", function(e){
+        e.preventDefault();
+         if (over) {
+      over = false;
+      g.css({"display": "none"});
+    }
+             
+               
+    });
+
+
+        //dom_cache.body.on('drop', function (e) {
+            /**
+             * @namespace e.originalEvent.dataTransfer
+             * @namespace e.originalEvent.dataTransfer.files
+             */
+         /*   e.preventDefault();
             dom_cache.drop_layer.addClass('dropped');
             var entryList = e.originalEvent.dataTransfer.items;
             engine.files.readDropFiles(entryList, function(collections) {
@@ -537,10 +624,14 @@ $('html').click(function(e) {
             dom_cache.drop_layer.css({"display": "block"});
             clearTimeout(var_cache.drop_timer);
             var_cache.drop_timer = setTimeout(function () {
-                dom_cache.drop_layer.css({"display": "none"});
-                dom_cache.drop_layer.removeClass('dropped');
+             //   dom_cache.drop_layer.css({"display": "none"});
+             //   dom_cache.drop_layer.removeClass('dropped');
             }, 300);
-        });
+        }).on("dragleave", function(e){
+        e.preventDefault();
+             dom_cache.drop_layer.css({"display": "none"});
+                dom_cache.drop_layer.removeClass('dropped');
+    })*/
     };
     var clearPreloadBars = function () {
         if (state.preload === undefined) {
@@ -764,6 +855,11 @@ $('html').click(function(e) {
             $('.trackList').remove();
             $('.nextList').remove();
               playlist.show();
+            $('#greeter').css('opacity',0);
+            setTimeout(function () {
+                $('#greeter').css('display','none');
+            },330);
+          //  setTimeout("$('#greeter').css('display','none');",330);
         },
         onLoadedMetaData: function (e) {
 
