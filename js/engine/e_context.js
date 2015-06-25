@@ -267,10 +267,12 @@ engine.context = function() {
     };
     create();
     var showMenu = function() {
-        engine.wm.createWindow({type: 'menu', config: {
+       // console.log( $.extend({},context_menu, custom_menu.track));
+        if (! $( "#side-menu" ).hasClass( "opened" )) $('#side-menu').addClass('opened'); else $('#side-menu').removeClass('opened');
+       /* engine.wm.createWindow({type: 'menu', config: {
             type: "menu",
             list: $.extend({},context_menu, custom_menu.track)
-        }});
+        }});*/
     };
     return {
         custom_menu: custom_menu,

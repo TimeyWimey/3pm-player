@@ -1,6 +1,6 @@
 var dialog = function() {
     /**
-     * @namespace _config
+   
      */
     var var_cache = {
         allow_ext: []
@@ -68,6 +68,7 @@ var dialog = function() {
                             writeFileList(list);
                         }, root, path);
                     });
+
                 });
                 dom_cache.fileList.on('change', 'input[type="checkbox"]', function(e) {
                     e.preventDefault();
@@ -111,11 +112,11 @@ var dialog = function() {
                             if (collection.trackList.length === 0) {
                                 return;
                             }
-                            _config.cb(collection);
+                            _config.cb(collection);  
                             _window.close();
                         }, root, path);
                     });
-                });
+                });    
                 dom_cache.playSelected.on('click', function(e) {
                     e.preventDefault();
                     var pl_name = cacheList.path.split('/').slice(-1)[0] || "Dropbox";
@@ -132,6 +133,7 @@ var dialog = function() {
                         return;
                     }
                     _config.cb(collection);
+
                     window.close();
                 });
             };
@@ -251,7 +253,7 @@ var dialog = function() {
                             if (collection.trackList.length === 0) {
                                 return;
                             }
-                            _config.cb(collection);
+                            _config.cb(collection); 
                             _window.close();
                         });
                     });
@@ -448,6 +450,8 @@ var dialog = function() {
     }();
     var dialogRender = function(type) {
         if (type === 'menu') {
+
+            console.log('menu');
             var list = [];
             for (var key in _config.list) {
                 var item = _config.list[key];
@@ -465,13 +469,14 @@ var dialog = function() {
                     e.preventDefault();
                     var $this = $(this);
                     var id = $this.data('id');
-                    _config.list[id].action();
+                    _config.list[id].action(); 
                     chrome.app.window.current().close();
                 })
             );
             return;
         }
         if (type === 'm3u') {
+            console.log('m3u');
             var list = [];
             for (var i = 0, item; item = _config.collectionList[i]; i++) {
                 list.push( $('<li>', {class: (item.id !== undefined && item.id === _config.id)?'active':undefined }).data('index', i).append(
@@ -486,7 +491,12 @@ var dialog = function() {
                     var index = $this.data('index');
                     _config.onclose = undefined;
                     _config.cb( index );
+
+              
+
                     chrome.app.window.current().close();
+                    
+                   //console.log('fuck');
                 }),
                 _config.join && $('<div>', {'class': 'join_body'}).append(
                     $('<input>', {type: 'button', name: 'join', value: chrome.i18n.getMessage('btnJoinPlaylistList') }).on('click', function(e) {
@@ -594,7 +604,7 @@ var dialog = function() {
     return {
         show: function() {
             dom_cache.body = $(document.body);
-            dom_cache.body.append(
+            $('#title-bar').append(
                 $('<div>', {'class': 'close t_btn', title: chrome.i18n.getMessage("btnClose") }).on('click', function (e) {
                     e.preventDefault();
                     window.close();

@@ -1,43 +1,4 @@
-html {
-    height: 100%;
-}
-body {
-    margin: 0;
-    -webkit-app-region: drag;
-    background: -webkit-linear-gradient(top, #565A61 0%,#212125 120px,#212125 100%);
-    color: #C9C9C9;
-    height: 100%;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    font-size: 75%;
-}
-.t_btn {
-    background-size: 14px 14px;
-    height: 14px;
-    width: 14px;
-    float: right;
-    opacity: 0.45;
-    z-index: 50;
-    cursor: pointer;
-    -webkit-app-region: no-drag;
-    position: absolute;
-    top: 2px;
-    background-color: #000;
-    border: 1px solid #525252;
-    border-radius: 4px;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-.t_btn:hover {
-    opacity: 0.7;
-}
-.mini {
-    background-image: url('../img/__w.png');
-    right: 18px;
-}
-.close {
-    background-image: url('../img/x_w.png');
-    right: 2px;
-}
+
 .collections {
     background-image: url(../img/select_w.png);
     right: 34px;
@@ -84,41 +45,6 @@ div.layer.drop > .dropped span {
     background-color: #6D6D6D;
 }
 
-div.controls {
-    margin-bottom: -49px;
-}
-div.controls > .btn {
-    display: inline-block;
-    height: 27px;
-    width: 59px;
-    background-repeat: no-repeat;
-    background-position: center;
-    -webkit-app-region: no-drag;
-    cursor: pointer;
-    border-right: 1px solid #000000;
-}
-div.controls .btn:active {
-    background-color: #161616;
-}
-div.controls div.shuffle {
-    background-image: url(../img/shuffle_w.png);
-    background-position-y: 4px;
-}
-div.controls div.loop {
-    background-image: url(../img/loop_w.png);
-    background-position-y: 7px;
-}
-div.controls div.loop.on {
-    background-image: url(../img/loop_on.png);
-}
-div.controls div.shuffle.on {
-    background-image: url(../img/shuffle_on.png);
-}
-div.controls div.sort {
-    background-image: url(../img/sort_w.png);
-    background-position-y: 5px;
-    position: relative;
-}
 div.controls div.sort:active {
     background-color: transparent;
 }
@@ -163,8 +89,7 @@ div.controls div.sort:hover .popup {
     padding: 0;
     margin: 0;
     overflow: auto;
-    border-top: 1px solid #363636;
-    border-bottom: 1px solid #000;
+
 }
 .nextList {
     height: auto;
@@ -247,7 +172,7 @@ div.controls div.sort:hover .popup {
     overflow: hidden;
 }
 .trackListStyle > li .title {
-    margin-top: 5px;
+    margin-top: -1px;
     font-size: 120%;
 }
 .trackListStyle .sub_menu,
@@ -384,16 +309,18 @@ div.controls div.sort:hover .popup {
 .customScroll::-webkit-scrollbar-button {
     height: 0;
     width: 0;
+display: none;
 }
 .customScroll::-webkit-scrollbar-thumb:vertical {
     background-clip: padding-box;
-    background-color: #565A61;
+    background-color: #aaa;
     border: 5px solid transparent;
-    border-radius: 10px;
+    border-radius: 2px;
     min-height: 20px;
     min-width: 20px;
     height: 5px;
     width: 5px;
+    
 }
 
 
@@ -580,4 +507,48 @@ body.winamp {
 }
 .winamp ul.collectionList li {
     margin: 0;
+}
+.move{
+ 
+    position: absolute;
+    width: 15px;
+    top: 50%;
+    height: 20px;
+    z-index: 5;
+    display: block;
+background-repeat: no-repeat;
+    z-index: 5;
+    display: block;
+    opacity: .3;
+    background-size: 10px 7px;
+    background-position: center;
+    margin-top: -10px;
+    transition:.25s;
+    background-image: url('../img/menu_a.png');
+}
+.move:hover{
+    opacity: .7;
+}
+.trackListStyle > li .cover {
+    left: 31px;
+}
+.trackListStyle > li > span {
+    margin-left: 68px;
+    border-radius: 21px;
+    }
+.remove {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: url(../img/x.png);
+    background-size: 10px;
+    opacity: .5;
+    right: 0;
+    display: none;
+}
+.cover{
+    border-radius: 50px;
+}
+li{
+    border-radius: 2px;
 }

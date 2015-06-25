@@ -3,6 +3,7 @@
  * @namespace chrome.contextMenus.removeAll
  * @namespace document.webkitHidden
  * @namespace chrome.app.window.current.onBoundsChanged
+ * @namespace _config
  */
 window.player = function () {
     var dom_cache = {};
@@ -303,11 +304,28 @@ window.player = function () {
         var_cache.player_is_empty = state.empty;
     };
     var playerRender = function() {
-        dom_cache.body.addClass(var_cache.is_winamp?'winamp':undefined).append(
-            $('<div>', {'class': 'menu t_btn', title: chrome.i18n.getMessage("btnMenu") }).on('click', function (e) {
+
+        $('#ngx').on('click',function () { engine.cloud.vk.makeAlbums(function (collections) { engine.wm.createWindow({type: 'm3u', config: {type: 'm3u', collectionList: collections, cb: function(index) { engine.playlist.emptyPlaylist(function(){ engine.playlist.appendPlaylist(collections, function() { engine.playlist.selectPlaylist(collections[index].id); }); }); }}}); });  if (! $( "#side-menu" ).hasClass( "opened" )) $('#side-menu').addClass('opened'); else $('#side-menu').removeClass('opened');
+        
+      
+
+      });
+
+
+
+        $('#files').on('click', function(){ engine.context.menu.openFiles.action();});
+$('html').click(function(e) {
+    console.log(e.target.id);
+    if ( e.target.id!="menu_btn" && e.target.id!="side-menu") $('#side-menu').removeClass('opened');
+});  
+
+      //  dom_cache.body.addClass(var_cache.is_winamp?'winamp':undefined).
+      $('#title-bar').append(
+            $('<div>', {'class': 'menu t_btn', 'id':'menu_btn', title: chrome.i18n.getMessage("btnMenu") }).on('click', function (e) {
                 e.preventDefault();
                 engine.context.showMenu();
-            }),
+            }))
+      dom_cache.body.addClass(var_cache.is_winamp?'winamp':undefined).append(
             dom_cache.drop_layer = $('<div>', {'class': 'drop layer'}).append(
                 $('<span>', {text: chrome.i18n.getMessage("onDropText") })
             ),
@@ -315,6 +333,7 @@ window.player = function () {
                 $('<span>', {text: chrome.i18n.getMessage("click_for_open") })
             ).on('click', function () {
                     engine.context.menu.openFiles.action();
+
                 }),
             $('<div>', {'class': 'player'}).append(
                 dom_cache.player_box = $('<div>', {'class': 'box'}).append(
@@ -330,11 +349,7 @@ window.player = function () {
                     )
                 ),
                 $('<div>', {'class': 'info'}).append(
-                    dom_cache.currentTime = $('<span>', {'class': 'time', text: '00:00'}).on('click', function () {
-                        state.time_format = (state.time_format === 1) ? 0 : 1;
-                        engine.settings.set({'time_format': state.time_format});
-                        changeTime( engine.player.getMedia() );
-                    }),
+                   
                     $('<div>', {'class': 'pl_state'}).append(
                         dom_cache.shuffle = $('<div>', {'class': 's_btn shuffle'+( (_settings.shuffle === 1)?' on':'' ), title: chrome.i18n.getMessage("btnShuffle") }).on('click', function () {
                             engine.playlist.setShuffle();
@@ -342,7 +357,12 @@ window.player = function () {
                         dom_cache.loop = $('<div>', {'class': 's_btn loop'+( (_settings.loop === 1)?' on':'' ), title: chrome.i18n.getMessage("btnLoop") }).on('click', function () {
                             engine.playlist.setLoop();
                         })
-                    )
+                    ),
+                     dom_cache.currentTime = $('<span>', {'class': 'time', text: '00:00'}).on('click', function () {
+                        state.time_format = (state.time_format === 1) ? 0 : 1;
+                        engine.settings.set({'time_format': state.time_format});
+                        changeTime( engine.player.getMedia() );
+                    })
                 ),
                 dom_cache.progress_bar = $('<div>', {'class': 'progress_bar'}).slider({
                     range: "min",
@@ -405,10 +425,10 @@ window.player = function () {
                     }, 25);
                 }),
                 $('<div>', {'class': 'controls'}).append(
-                    $('<div>', {'class': 'btn playlist', title: chrome.i18n.getMessage("playlist") }).on('click', function (e) {
+                   /* $('<div>', {'class': 'btn playlist', title: chrome.i18n.getMessage("playlist") }).on('click', function (e) {
                         e.preventDefault();
                         engine.wm.createWindow({type: 'playlist'});
-                    }),
+                    }),*/
                     $('<div>', {'class': 'btn prev', title: chrome.i18n.getMessage("btnPreviousTrack") }).on('click', function (e) {
                         e.preventDefault();
                         engine.playlist.previousTrack();
@@ -427,6 +447,7 @@ window.player = function () {
                         e.preventDefault();
                         engine.playlist.nextTrack();
                     }),
+                    $('<div>',{'class':'btn v_holder'}).append(
                     dom_cache.volume_icon = $('<div>', {'class': 'btn volume_icon', title: chrome.i18n.getMessage("btnMute") }).on('click', function (e) {
                         e.preventDefault();
                         engine.player.mute(!state.muted);
@@ -483,9 +504,14 @@ window.player = function () {
                                 engine.player.volume("-10");
                             }
                         })
+                    )
                 )
             )
         );
+
+
+  
+
         dom_cache.body.on('drop', function (e) {
             /**
              * @namespace e.originalEvent.dataTransfer
@@ -629,6 +655,7 @@ window.player = function () {
             }
         },
         onPlay: function (e) {
+
             if (state.paused !== e.target.paused) {
                 state.paused = false;
                 changePlayState();
@@ -732,7 +759,11 @@ window.player = function () {
                 changeProgressBarMode();
             }
             state.paused = e.target.paused;
-            changePlayState();
+           // console.log('d');
+          changePlayState();
+            $('.trackList').remove();
+            $('.nextList').remove();
+              playlist.show();
         },
         onLoadedMetaData: function (e) {
 
@@ -1003,7 +1034,7 @@ window.player = function () {
         boot: function () {
             // отображение основных кнопок
             dom_cache.body = $(document.body);
-            dom_cache.body.append(
+             $('#title-bar').append(
                 $('<div>', {'class': 'mini t_btn', title: chrome.i18n.getMessage("btnMinimize") }).on('click', function (e) {
                     e.preventDefault();
                     chrome.app.window.current().minimize();

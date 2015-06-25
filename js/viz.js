@@ -6,7 +6,8 @@ var viz = function() {
     return {
         boot: function() {
             dom_cache.body = $(document.body);
-            dom_cache.body.append(
+           // dom_cache.body 
+            $('#title-bar').append(
                 dom_cache.btnFullScreen = $('<div>', {'class': 'inFullscreen t_btn', title: chrome.i18n.getMessage("btnFullScreen") }).on('click', function (e) {
                     e.preventDefault();
                     if (document.webkitIsFullScreen) {

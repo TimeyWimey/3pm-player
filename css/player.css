@@ -1,20 +1,21 @@
+
 html {
     height: 100%;
 }
 body {
     margin: 0;
-    -webkit-app-region: drag;
-    background: -webkit-linear-gradient(top, #565A61 0%,#212125 100%);
-    color: #C9C9C9;
+    -webkit-app-region: no-drag;
+    background: #F1F1F1;
+    color: #8E8E8E;
     height: 100%;
     font-family: 'Segoe UI', Tahoma, sans-serif;
     font-size: 75%;
 }
 .player .image, .player > .track {
-    display: inline-block;
+   /* display: inline-block;*/
 }
 .player .track {
-    margin-left: 83px;
+    margin-left: 100px;
     overflow: hidden;
     max-height: 68px;
 }
@@ -23,7 +24,7 @@ body {
     text-overflow: ellipsis;
 }
 .player .track > div.name {
-    color: #fff;
+    color:#4C4C4C;
     font-size: 130%;
     max-width: 232px;
 }
@@ -48,25 +49,28 @@ body {
     text-overflow: ellipsis;
 }
 .player .image_box {
-    width: 81px;
+    width: 70px;
     height: 80px;
     float: left;
     margin-right: 4px;
-    border-right: 1px solid #5A5A5A;
+ margin-left: 10px;
+
+    border-radius: 50%;
 }
 .player .image {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     left: 0;
     top: 0;
     position: absolute;
     z-index: 10;
     overflow: hidden;
-    border-right: 1px solid #000;
+    border-radius: 50%;
     background-size: 80px;
+    margin-left: 10px;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: #1D1D1D;
+
     background-image: url(../img/no-cover.png);
 }
 .player .box {
@@ -75,12 +79,13 @@ body {
 }
 .player .info {
     position: relative;
+    top: -22px;
+    margin-bottom: -22px;
+    text-align: right;
 }
 .player .info > span.time {
-    position: absolute;
-    top: -15px;
-    right: 3px;
-    -webkit-app-region: no-drag;
+    display: inline-block;
+    margin-right: 15px;
 }
 .player > div.controls > .btn {
     display: inline-block;
@@ -89,38 +94,54 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     -webkit-app-region: no-drag;
+    width: 20%;
+    vertical-align: middle;
     cursor: pointer;
 }
+
 div.progress_bar > *,
 div.volume_bar > * {
     position: absolute;
     top: 0;
-    height: 5px;
+    height: 3px;
 }
 div.progress_bar > a.ui-slider-handle:focus,
 .player .volume_bar > a.ui-slider-handle:focus {
     outline-color: #fff;
 }
 div.progress_bar {
-    background-color: #111111;
-    height: 5px;
+    background-color: #737373;
+    height: 3px;
     cursor: pointer;
     -webkit-app-region: no-drag;
     position: relative;
-    border-top: 1px solid #3C3C3C;
-    border-bottom: 1px solid #3C3C3C;
+    margin: 10px 0;
 }
 div.progress_bar > div.ui-slider-range {
-    background: -webkit-linear-gradient(top, #F8D476 0%,#FF8500 100%);
+    background: #0EA2F7;
     z-index: 1;
-    box-shadow: 0px 0px 5px rgba(255, 155, 5, 0.7);
 }
 div.progress_bar > a.ui-slider-handle {
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(255, 255, 255);
     width: 2px;
     z-index: 2;
+    height: 10px;
+    outline:  none;
+    width: 10px;
+        margin-left: -5px;
+        top: -4px;
+    border-radius: 18px;
+  transition: height .2s , top .2s, top .2s, width .2s, left 0s;
+    border: solid 1px #807F7F;
 }
-
+div.progress_bar > a.ui-slider-handle:hover, div.progress_bar > a.ui-slider-handle:active{
+    height: 15px;
+    width: 15px;
+     -webkit-app-region: no-drag;
+    top: -8px;
+        margin-left: -7px;
+    border-width: 2px;
+}
 @-webkit-keyframes pre_progress_move {
     0% {
         background-position: 0 20px;
@@ -167,14 +188,8 @@ div.progress_bar > div.preloadBar {
 div.progress_bar > div.preloadBar > div {
     position: absolute;
     top: 0;
-    height: 5px;
-    background-image: -webkit-gradient(linear, left top, right bottom,
-    color-stop(.25, rgba(255, 255, 255, .1)),
-    color-stop(.25, transparent),
-    color-stop(.5, transparent),
-    color-stop(.5, rgba(255, 255, 255, .1))
-    );
-    background-color: rgb(31, 31, 31);
+    height: 3px;
+    background-color: rgba(31, 31, 31,.3);
     background-repeat: repeat;
     background-size: 20px 20px;
     -webkit-animation: pre_progress_move 1s linear infinite;
@@ -211,75 +226,106 @@ div.progress_bar > div.downloadBar {
     background-color: #111111;
     cursor: pointer;
     position: relative;
-    border: 1px solid #3C3C3C;
-    margin-top: 11px;
+    margin-top: 12px;
+    background-color: #737373;
+    height: 3px;
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+    position: relative;
+
 }
 .player .volume_bar > div {
-    background: -webkit-linear-gradient(top, #F8D476 0%,#FF8500 100%);
+    background:   #0EA2F7;
     position: absolute;
     z-index: 1;
-    height: 5px;
-    box-shadow: 0px 0px 5px rgba(255, 155, 5, 0.7);
+    height: 3px;
+
 }
 .player .volume_bar > a.ui-slider-handle {
-    background-color: rgb(241, 241, 241);
-    position: absolute;
+ background-color: rgb(255, 255, 255);
+    width: 52px;
     z-index: 2;
-    height: 5px;
-    width: 2px;
+    height: 8px;
+    outline: none;
+    width: 8px;
+    margin-left: -2px;
+    top: -3px;
+    border-radius: 18px;
+    transition: height .2s , top .2s, top .2s, width .2s, left 0s;
+    border: solid 1px #807F7F;
+}
+.player .volume_bar > a.ui-slider-handle:hover, .player .volume_bar > a.ui-slider-handle:active {
+
+
+    height: 10px;
+    border-width: 2px;
+    width: 10px;
+
+    margin-left: -5px;
+    top: -5px;
 }
 .player > div.controls .btn {
-    border-right: 1px solid #000000;
+        background-size: 22px;
 }
 .player > .controls .btn.volume_icon {
     width: 16px;
-    background-image: url(../img/sound_high_w.png);
+    height: 16px;
+    background-image: url(../img/sound_high.png);
     background-position: center;
     background-repeat: no-repeat;
     padding-left: 5px;
     padding-right: 5px;
     border-right: 0;
+        display: inline-block;
+    height: 16px;
+    top: 0;
+    margin-right: 13px;
+        background-size: 20px;
+    vertical-align: super;
+    margin-top: 9px;
 }
 .player > .controls > .btn.volume_icon.v100 {
-    background-image: url(../img/sound_high_w.png);
+    background-image: url(../img/sound_high.png);
 }
 .player > .controls > .btn.volume_icon.v50 {
-    background-image: url(../img/sound_medium_w.png);
+    background-image: url(../img/sound_medium.png);
 }
 .player > .controls > .btn.volume_icon.v10 {
-    background-image: url(../img/sound_low_w.png);
+    background-image: url(../img/sound_low.png);
 }
 .player > .controls > .btn.volume_icon.v0 {
-    background-image: url(../img/sound_zero_w.png);
+    background-image: url(../img/sound_zero.png);
 }
 .player > .controls > .btn.volume_icon.muted {
-    background-image: url(../img/sound_mute_w.png);
+    background-image: url(../img/sound_mute.png);
 }
 .player > div.controls .btn:active {
-    background-color: #161616;
+   
 }
 .player > div.controls .prev {
-    background-image: url(../img/playback_prev_w.png);
-    background-position-y: 6px;
+    background-image: url(../img/playback_prev.png);
+background-position-y: 5px;
+
 }
 .player > div.controls .playpause {
-    background-image: url(../img/playback_play_w.png);
-    background-position-y: 6px;
+    background-image: url(../img/playback_play.png);
+    background-size: 15px;
+    background-position-y: 8px;
 }
 .player > div.controls .paused {
-    background-image: url(../img/playback_pause_w.png);
-    background-position-y: 5px;
+    background-image: url(../img/playback_pause.png);
+    background-position-y: 8px;
 }
 .player > div.controls .stop {
-    background-image: url(../img/playback_stop_w.png);
+    background-image: url(../img/playback_stop.png);
     background-position-y: 5px;
 }
 .player > div.controls .next {
-    background-image: url(../img/playback_next_w.png);
-    background-position-y: 6px;
+    background-image: url(../img/playback_next.png);
+    background-position-y: 5px;
 }
 .player > div.controls .playlist {
-    background-image: url(../img/playlist_w.png);
+    background-image: url(../img/playlist.png);
     background-position-y: 4px;
 }
 div.drop.layer {
@@ -315,7 +361,7 @@ div.engine {
 div.stateIcon {
     height: 20px;
     width: 20px;
-    display: none;
+    display: none !important;
     margin-top: 3px;
     margin-left: 2px;
 }
@@ -329,46 +375,47 @@ div.stateIcon.error {
     display: block;
     opacity: 0.7;
 }
-.t_btn {
-    background-size: 14px 14px;
-    height: 14px;
-    width: 14px;
-    float: right;
+.t_btn {   
+ background-size: 16px;
+    height: 32px;
+    width: 32px;
+    margin-right: 5px;
+    display: inline-block;
+    transition:.3s;
     opacity: 0.45;
     z-index: 50;
     cursor: pointer;
     -webkit-app-region: no-drag;
-    position: absolute;
-    top: 2px;
-    background-color: #000;
-    border: 1px solid #525252;
-    border-radius: 4px;
     background-position: center;
     background-repeat: no-repeat;
+
 }
 .t_btn:hover {
     opacity: 0.7;
 }
 .mini {
-    background-image: url('../img/__w.png');
+    background-image: url('../img/_.png');
     top: 18px;
     right: 2px;
+    margin: 0;
 }
 .close {
-    background-image: url('../img/x_w.png');
+    background-image: url('../img/x.png');
     right: 2px;
 }
 .t_btn.menu {
-    background-image: url('../img/menu_w.png');
+    background-image: url('../img/menu_a.png');
     top: 34px;
     right: 2px;
     background-position: center;
-    background-size: 10px;
+        background-size: 11px 7px;
+    float: left;
+    opacity: .35;
 }
 .selectFile.layer {
     position: absolute;
-    left: 90px;
-    top: 20px;
+    left: 50%;
+    top: 54px;
     font-size: 18px;
     color: #ccc;
     border: 1px dashed #ccc;
@@ -378,7 +425,9 @@ div.stateIcon.error {
     -webkit-app-region: no-drag;
     width: 218px;
     padding-top: 6px;
+    margin-left: -70px;
     padding-bottom: 8px;
+    z-index: 55;
 }
 .selectFile.layer input {
     display: none;
@@ -387,13 +436,12 @@ div.volume_scroll {
     -webkit-app-region: no-drag;
 }
 div.volume_scroll > div.image {
-    -webkit-app-region: drag;
+    -webkit-app-region: no-drag;
 }
 div.pl_state {
     -webkit-app-region: no-drag;
-    position: absolute;
-    top: -13px;
-    left: 82px;
+      display: inline-block;
+      vertical-align: text-top;
 }
 div.s_btn {
     display: inline-block;
@@ -403,13 +451,14 @@ div.s_btn {
     background-position-x: 3px;
     height: 12px;
     width: 19px;
+    margin-right: 15px;
 }
 div.s_btn.shuffle {
-    background-image: url(../img/shuffle_w.png);
+    background-image: url(../img/shuffle.png);
     background-position-y: -1px
 }
 div.s_btn.loop {
-    background-image: url(../img/loop_w.png);
+    background-image: url(../img/loop.png);
     background-position-y: 1px;
     background-size: 14px;
 }
@@ -465,6 +514,10 @@ body.winamp {
 }
 .winamp .track div.album {
     display: none;
+}
+.player{
+    position: relative;
+        margin-top: 15px;
 }
 .winamp .player .progress_bar {
     position: absolute;
@@ -720,4 +773,160 @@ body.winamp {
     bottom: 56px;
     left: 22px;
     -webkit-app-region: no-drag;
+}
+#title-bar{
+    width: 100%;
+    height: 32px;
+    text-align: right;
+    z-index: 300;
+    position:relative;
+        -webkit-app-region: drag;
+}
+
+.closed{
+    position: fixed;
+    height: 100%;
+    top: 0;
+    padding-top: 32px;
+    background: white;
+
+    background: #6F6F6F;
+    margin-left: -100%;
+    transition:.4s; z-index: 200;
+    width: 215px;
+}
+.opened{
+    margin-left: 0;
+   
+}
+.menu-play{
+    padding: 10px;
+    cursor: pointer;
+    color: #555555;
+    color: white;
+    position: relative;
+    font-size: 14px;
+    transition:.25s;
+}
+.v_holder{
+        width: 39% !important;
+    text-align: center;
+}
+.controls{
+    max-width: 500px;
+}
+.menu-play:hover{
+    background-color: rgb(220,220,220);
+}
+
+.menu-play:active{
+    background-color: rgb(210,210,210);
+}
+.trackList{
+    margin: 0;
+    margin-top: 20px;
+    height: calc(100% - 200px);
+    overflow: auto;
+        list-style: none;
+    padding: 0;
+}
+.trackList > li {
+    padding: 10px;
+    cursor: pointer;
+    color: #555;
+    font-size: 14px;
+}
+li{
+   /* transition:.3s ease-out;*/
+    background: #f1f1f1;
+}
+.ui-sortable-helper{
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 6px; 
+}
+
+
+@media only screen and (min-width:920px) {
+ 
+    .menu{
+        display: none;
+    }
+    .trackList{
+        display: inline-block;
+        margin-top: 0;
+        height: calc(100% - 32px);
+        width: calc((100% - 220px)/2);
+        margin-left: 215px;
+   
+    }
+    .player{
+    height: 100%;
+    margin: 0;
+    width: calc((100% - 220px)/2);
+    float: right;
+    }
+    .closed{
+    background: #6F6F6F;
+    margin-left: 0;
+    transition: .4s;
+    z-index: 200;
+    }
+    .menu-play{
+        color: white;
+    }
+    .menu-play:hover{
+        color: #6F6F6F;
+    }
+    
+    .controls{
+            position: absolute;
+    width: 100%;
+    bottom: 57px;
+    /* left: 50%; */
+    /* margin-left: -471px; */
+    max-width: none;
+        padding-top: 21px;
+    }
+    div.progress_bar {
+    background-color: #737373;
+    height: 3px;
+    cursor: pointer;
+    position: absolute;
+    position: absolute;
+    width: calc(100% - 10px);
+    bottom: 104px;}
+
+    .player .image{
+
+    width: 350px;
+    height: 350px;
+    background-position: center 0;
+    background-size: cover;
+    border-radius: 256px;
+    top: 0;
+    margin-left: -175px;
+    left: 50%;
+    z-index: -1;
+
+    background-image: url(../img/no-cover-big.png);
+
+    }
+    .selectFile.layer{
+        display: none;
+    }
+    .player .track{
+            margin-left: 0px;
+    overflow: hidden;
+    max-height: 68px;
+    position: absolute;
+    bottom: 131px;
+    }
+    .player .info{
+            position: absolute;
+    margin-bottom: 0;
+    top: initial;
+    text-align: right;
+    right: 20px;
+    bottom: 135px;
+    }
+    /* CSS rules here */
 }

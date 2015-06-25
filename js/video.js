@@ -83,6 +83,28 @@ var video = function() {
         }, 3000);
     };
     var videoRender = function() {
+var resizeTimer;
+$(window).resize(function () {
+            console.log('event');
+                    var win = chrome.app.window.current();
+                    if (document.webkitIsFullScreen || document.webkitHidden || win.isMaximized()) {
+                        return;
+                    }
+                    var vh = dom_cache.video.videoHeight;
+                    if (vh === 0) {
+                        return;
+                    }
+                    var vw = dom_cache.video.videoWidth;
+                    var wh = window.innerHeight;
+                    var ww = window.innerWidth;
+                    if (wh - vh < ww - vw ) {
+                        ww = (vw * wh) / vh;
+                    } else {
+                        wh = (vh * ww) / vw;
+                    }
+                    win.resizeTo( ww, wh );
+                });
+        
         dom_cache.body.append(
             $('<div>', {'class': 'top panel'}).append(
                 dom_cache.title = $('<div>',{'class':'title'}),

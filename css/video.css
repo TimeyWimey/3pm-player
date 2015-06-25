@@ -30,10 +30,8 @@ video {
     cursor: pointer;
     -webkit-app-region: no-drag;
     position: absolute;
-    top: 2px;
-    background-color: #000;
-    border: 1px solid #525252;
-    border-radius: 4px;
+    top: 8px;
+    
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -42,20 +40,22 @@ video {
 }
 .mini {
     background-image: url('../img/__w.png');
-    right: 18px;
+    right: 30px;
 }
 .close {
     background-image: url('../img/x_w.png');
-    right: 2px;
+    right: 10px;
 }
 .inFullscreen {
     background-image: url('../img/fullscreen_w.png');
-    right: 34px;
+    right: 48px;
+
     background-size: 10px;
 }
 .onTop {
     background-image: url('../img/pin_w.png');
     right: 50px;
+    display: none;
 }
 .onTop.on {
     opacity: 1;
@@ -63,7 +63,8 @@ video {
 }
 .winResize {
     background-image: url('../img/diagonal_w.png');
-    right: 66px;
+    right: 68px;
+    background-position: center;
     background-size: 10px;
 }
 body.show .panel {
@@ -81,20 +82,22 @@ body.show .panel {
 .panel.top {
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(84, 84, 84, 0.53);
 }
 .panel.bottom .controls_body {
-    background-color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 10px;
 }
 .panel.bottom {
     bottom: 0;
+        background-color: rgba(84, 84, 84, 0.53);
     left: 0;
 }
 .panel.top .title {
-    padding-right: 83px;
-    font-size: 19px;
-    padding-left: 5px;
+        font-size: 16px;
+    padding-left: 14px;
     word-wrap: break-word;
+    padding: 5px 0 8px 14px;
+ 
 }
 div.controls {
     margin: 0 auto;
@@ -140,13 +143,13 @@ div.controls .scroll_up {
     height: 10px;
 }
 .progress_body .dec_line {
-    position: absolute;
-    top: 4px;
+     position: absolute;
+    top: 6px;
     display: block;
     width: 100%;
-    height: 5px;
+    height: 3px;
     background-color: rgba(0, 0, 0, 0.74);
-    border: 1px solid rgba(255, 255, 255, 0.33);
+    /* border: 1px solid rgba(255, 255, 255, 0.33); */
     border-left: 0;
     border-right: 0;
 }
@@ -166,35 +169,43 @@ div.controls .scroll_up {
     cursor: pointer;
 }
 .progress_body .progress_bar > div {
-    background-color: #CC181E;
-    height: 5px;
+    background-color: #FDFDFD;
+    height: 3px;
     z-index: 1;
     position: absolute;
-    top: 5px;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+    top: 6px;
 }
 .progress_body .progress_bar > a {
-    background-color: rgb(255, 255, 255);
-    height: 5px;
-    width: 2px;
+      background-color: rgb(255, 255, 255);
+    height: 9px;
+    width: 9px;
     z-index: 2;
     position: absolute;
-    top: 5px;
+    outline: none;
+    top: 3px;
+    transition:width .15s, height .15s, top .15s;
+    border-radius: 15px;
 }
-.progress_body .progress_bar > a:focus {
-    outline-color: #fff;
+.progress_body .progress_bar > a:hover,
+.progress_body .progress_bar > a:active {
+height: 15px;
+    width: 15px;
+        top: 0px;
 }
 .progress_body > .popup {
-    position: absolute;
+        position: absolute;
     background-color: rgba(0, 0, 0, 0.28);
-    padding-left: 2px;
-    padding-right: 2px;
-    border-radius: 2px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 35px;
+    padding: 12px 6px;
     z-index: 5;
-    margin-top: -15px;
+    margin-top: -52px;
     margin-left: -15px;
     color: #fff;
+    transition: .1s ease-out;
 }
+
 .volume_popup {
     display: none;
     font-size: 200%;

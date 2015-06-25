@@ -190,9 +190,10 @@ engine.playlist = function() {
                 }
                 if (track !== undefined) {
                     onOpenTrack(track.id);
-                    _send('playlist', function (window) {
+                   // _send('playlist', function (window) {
                         window.playlist.updateNextList(collection);
-                    });
+                       console.log(collection);
+                   // });
                     return;
                 }
             }

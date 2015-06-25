@@ -5,6 +5,8 @@
     <title>3pm-player</title>
     <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
+    <link href="css/playlist.css" rel="stylesheet"/>
+
     <link href="css/player.css" rel="stylesheet"/>
     <!-- вынести -->
     <script src="js/dancer/dancer.js"></script>
@@ -17,8 +19,17 @@
     <script src="js/id3-minimized.js"></script>
     <script src="js/spark-md5.js"></script>
     <!-- -->
+    <script src="js/playlist.js"></script>
+
     <script src="js/player.js"></script>
     <script src="js/engine.js"></script>
 </head>
-<body></body>
+<body>
+    <div id="title-bar"></div>
+    <div id='side-menu' class="closed">
+        <div id='ngx' class="menu-play">Вконтакте</div>
+
+        <div id='files' class="menu-play">Открыть файлы</div>
+    </div>
+</body>
 </html>

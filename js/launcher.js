@@ -17,7 +17,8 @@
         chrome.app.window.create('player.html', {
             bounds: position,
             frame: "none",
-            resizable: false,
+            minWidth: 400,
+    minHeight: 400,
             id: 'player'
         }, function(appWindow) {
             if (appWindow.innerBounds.height !== position.height
