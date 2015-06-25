@@ -310,6 +310,11 @@ window.player = function () {
       
 
       });
+        $('#ngx1').on('click',function () { engine.cloud.vk.makeAlbums(function (collections) { engine.wm.createWindow({type: 'm3u', config: {type: 'm3u', collectionList: collections, cb: function(index) { engine.playlist.emptyPlaylist(function(){ engine.playlist.appendPlaylist(collections, function() { engine.playlist.selectPlaylist(collections[index].id); }); }); }}}); });  if (! $( "#side-menu" ).hasClass( "opened" )) $('#side-menu').addClass('opened'); else $('#side-menu').removeClass('opened');
+        
+      
+
+      });
         $('#x-greeter').on('click',function(){     window.close();});
         $('#gdrive').on('click', function () {
                 engine.cloud.gd.getFileList(undefined, function (list) {
@@ -349,11 +354,50 @@ window.player = function () {
                         }}});
                     });
                 });
+            });
+             $('#gdrive1').on('click', function () {
+                engine.cloud.gd.getFileList(undefined, function (list) {
+                    engine.wm.createWindow({type: 'filelist', config: {type: "gd", filelist: list, cb: function(collection) {
+                        var collections = [collection];
+                        engine.playlist.emptyPlaylist(function(){
+                            engine.playlist.appendPlaylist(collections, function() {
+                                engine.playlist.selectPlaylist(collections[0].id);
+                            });
+                        });
+                    }}});
+                });
+                 if ( $( "#side-menu" ).hasClass( "opened" ))  $('#side-menu').removeClass('opened');
+            });
+        $('#onedrive1').on('click',function (){ engine.cloud.od.getFileList(undefined, function (list) {
+                    engine.wm.createWindow({type: 'filelist', config: {type: "od", filelist: list, cb: function(collection) {
+                        var collections = [collection];
+                        engine.playlist.emptyPlaylist(function(){
+                            engine.playlist.appendPlaylist(collections, function() {
+                                engine.playlist.selectPlaylist(collections[0].id);
+                            });
+                        });
+                    }}});
+                });
+            if ( $( "#side-menu" ).hasClass( "opened" ))  $('#side-menu').removeClass('opened');
+            });
+
+        $('#folder1').on('click',function () {
+                chrome.fileSystem.chooseEntry({type: 'openDirectory'}, function (entry) {
+                    engine.files.readAnyFiles([entry], function(collections) {
+                        engine.wm.createWindow({type: 'm3u', config: {type: 'm3u', collectionList: collections, join: 1, cb: function(index) {
+                            engine.playlist.emptyPlaylist(function(){
+                                engine.playlist.appendPlaylist(collections, function() {
+                                    engine.playlist.selectPlaylist(collections[index].id);
+                                });
+                            });
+                        }}});
+                    });
+                });
             if ( $( "#side-menu" ).hasClass( "opened" ))  $('#side-menu').removeClass('opened');
 
             });
 
-        $('#files').on('click', function(){ engine.context.menu.openFiles.action();});
+        $('#files').on('click', function(){ engine.context.menu.openFiles.action();});$('#files1').on('click', function(){ engine.context.menu.openFiles.action();});
 $('html').click(function(e) {
     console.log(e.target.id);
     if ( e.target.id!="menu_btn" && e.target.id!="side-menu") $('#side-menu').removeClass('opened');
@@ -597,41 +641,6 @@ $('html').click(function(e) {
              
                
     });
-
-
-        //dom_cache.body.on('drop', function (e) {
-            /**
-             * @namespace e.originalEvent.dataTransfer
-             * @namespace e.originalEvent.dataTransfer.files
-             */
-         /*   e.preventDefault();
-            dom_cache.drop_layer.addClass('dropped');
-            var entryList = e.originalEvent.dataTransfer.items;
-            engine.files.readDropFiles(entryList, function(collections) {
-                if (collections === undefined) {
-                    return;
-                }
-                engine.wm.createWindow({type: 'm3u', config: {type: 'm3u', collectionList: collections, join: 1, cb: function(index) {
-                    engine.playlist.emptyPlaylist(function(){
-                        engine.playlist.appendPlaylist(collections, function() {
-                            engine.playlist.selectPlaylist(collections[index].id);
-                        });
-                    });
-                }}});
-            });
-        }).on('dragover', function (e) {
-            e.preventDefault();
-            dom_cache.drop_layer.css({"display": "block"});
-            clearTimeout(var_cache.drop_timer);
-            var_cache.drop_timer = setTimeout(function () {
-             //   dom_cache.drop_layer.css({"display": "none"});
-             //   dom_cache.drop_layer.removeClass('dropped');
-            }, 300);
-        }).on("dragleave", function(e){
-        e.preventDefault();
-             dom_cache.drop_layer.css({"display": "none"});
-                dom_cache.drop_layer.removeClass('dropped');
-    })*/
     };
     var clearPreloadBars = function () {
         if (state.preload === undefined) {
